@@ -13,6 +13,14 @@ let lightBox = new SimpleLightbox('.photo-card-link', {
   captionDelay: 250,
 });
 
+let options = {
+  root: null,
+  rootMargin: '100px',
+  threshold: 1.0,
+};
+
+let observer = new IntersectionObserver(onLoadMoreClick, options);
+
 export async function onSubmit(evt) {
   evt.preventDefault();
   page = 1;
@@ -30,7 +38,7 @@ export async function onSubmit(evt) {
         'beforeend',
         renderImageContainer(resp.data.hits)
       );
-
+      observer.observe(refs.target);
       refs.loadMoreBtn.style.display = 'block';
       lightBox.refresh();
       slowScrolling();
@@ -41,7 +49,7 @@ export async function onSubmit(evt) {
 }
 
 export async function onLoadMoreClick(evt) {
-  evt.preventDefault();
+  // evt.preventDefault();
   page += 1;
 
   try {
