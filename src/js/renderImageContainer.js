@@ -10,6 +10,7 @@ export function renderImageContainer(images) {
         comments,
         downloads,
       }) => `<div class="photo-card">
+      <a href="${largeImageURL}" class="photo-card-link">
       <img src="${webformatURL}" alt="${tags}" loading="lazy" />
       <div class="info">
         <p class="info-item">${likes}
@@ -25,6 +26,7 @@ export function renderImageContainer(images) {
           <b>Downloads</b>
         </p>
       </div>
+      </a>
     </div>`
     )
     .join('');

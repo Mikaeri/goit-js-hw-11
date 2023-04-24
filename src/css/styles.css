@@ -11,6 +11,7 @@ body {
   color: #212121;
   line-height: 1.5;
   font-size: 14;
+  background-color: rosybrown;
 }
 
 img{
@@ -22,9 +23,11 @@ img{
 .search-form {
   display: flex;
   justify-content: center;
-  background-color: blueviolet;
+  background-color: darkgrey;
   height: 40px;
   margin-bottom: 15px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 .gallery{
@@ -38,6 +41,12 @@ img{
   flex-basis: calc(100%/4 - 40px);
   height: 100%;
   background-color: floralwhite;
+}
+.photo-card-link{
+  display: block;
+  text-decoration: none;
+  height: 100%;
+  color: inherit;
 }
 
 .info{
@@ -59,4 +68,10 @@ img{
 
 .load-more{
   display: none;
+  margin: 20px auto;
+  text-align: center;
+  padding: 10px 25px;
+  background-color: aquamarine;
+  border: 1 solid bisque;
+  cursor: pointer;
 }
