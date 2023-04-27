@@ -39,7 +39,6 @@ export async function onSubmit(evt) {
         renderImageContainer(resp.data.hits)
       );
       observer.observe(refs.target);
-      // refs.loadMoreBtn.style.display = 'block';
       lightBox.refresh();
       slowScrolling();
     }
@@ -55,9 +54,8 @@ export async function onLoadMoreClick(entries, observer) {
 
       try {
         const resp = await getImages(page);
-        if (page * 40 >= resp.data.totalHits) {
+        if (page * 40 > resp.data.totalHits) {
           observer.unobserve(refs.target);
-          // refs.loadMoreBtn.style.display = 'none';
           Notify.info(
             "We're sorry, but you've reached the end of search results."
           );
