@@ -73,24 +73,45 @@ img{
   text-align: center;
 }
 
-.load-more{
-  display: none;
-  margin: 20px auto;
-  text-align: center;
-  padding: 10px 25px;
+button{
   background-color: aquamarine;
   border: 1 solid bisque;
   cursor: pointer;
+  border-radius: 2px;
+  
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+              transform  250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.photo-card img:hover {
+button:hover,
+button:focus{
+  background-color: bisque;
+  border-color: aquamarine;
+  transform: scale(1.05);
+}
+input{
+  outline: none;
+  background-color: ivory;
+  border: none;
+}
+input:hover,
+input:focus{
   transform: scale(1.03);
+  border: 1px solid grey;
+
 }
 
-.photo-card img {
+.photo-card:hover {
+  transform: scale(1.03);
+  
+}
+
+.photo-card {
   width: 100%;
   object-fit: cover;
-  transition: transform var(--animation-duration) var(--timing-function);
+  transition: transform  250ms cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 5px;
 }
 
 
