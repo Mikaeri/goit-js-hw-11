@@ -39,33 +39,40 @@ export async function onSubmit(evt) {
         renderImageContainer(resp.data.hits)
       );
       observer.observe(refs.target);
-      refs.loadMoreBtn.style.display = 'block';
+      // refs.loadMoreBtn.style.display = 'block';
       lightBox.refresh();
       slowScrolling();
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
-export async function onLoadMoreClick(evt) {
-  // evt.preventDefault();
-  page += 1;
+export async function onLoadMoreClick(entries, observer) {
+  for (const entry of entries) {
+    if (entry.isIntersecting) {
+      page += 1;
 
-  try {
-    const resp = await getImages(page);
-    if (page * 40 >= resp.data.totalHits) {
-      refs.loadMoreBtn.style.display = 'none';
-      Notify.info("We're sorry, but you've reached the end of search results.");
+      try {
+        const resp = await getImages(page);
+        if (page * 40 >= resp.data.totalHits) {
+          observer.unobserve(refs.target);
+          // refs.loadMoreBtn.style.display = 'none';
+          Notify.info(
+            "We're sorry, but you've reached the end of search results."
+          );
+          return;
+        }
+        refs.gallery.insertAdjacentHTML(
+          'beforeend',
+          renderImageContainer(resp.data.hits)
+        );
+        lightBox.refresh();
+        slowScrolling();
+      } catch (error) {
+        console.error(error);
+        Notify.failure('Failed to load more images. Please try again later.');
+      }
     }
-    refs.gallery.insertAdjacentHTML(
-      'beforeend',
-      renderImageContainer(resp.data.hits)
-    );
-    lightBox.refresh();
-    slowScrolling();
-  } catch (error) {
-    console.error(error);
-    Notify.failure('Failed to load more images. Please try again later.');
   }
 }
